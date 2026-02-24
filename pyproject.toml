@@ -1,0 +1,54 @@
+[project]
+name = "price-analyzer"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "celery>=5.6.2",
+    "django>=6.0.2",
+    "django-celery-beat>=2.1.0",
+    "django-filter>=25.2",
+    "djangorestframework>=3.16.1",
+    "drf-extra",
+    "drf-spectacular>=0.29.0",
+    "httpx>=0.28.1",
+    "pillow>=12.1.1",
+    "psycopg2-binary>=2.9.11",
+    "python-dotenv>=1.2.1",
+    "redis>=7.2.0",
+    "ruff>=0.15.2",
+]
+
+[tool.uv.sources]
+drf-extra = { git = "https://github.com/Serhii-Leonenko/drf-extra" }
+
+[tool.ruff]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "settings",
+    "migrations"
+]
