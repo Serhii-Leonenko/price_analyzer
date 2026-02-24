@@ -1,6 +1,5 @@
-from drf_extra.mixins import CreateModelMixin, DestroyModelMixin, ListModelMixin
+from drf_extra.mixins import CreateModelMixin
 from drf_extra.viewsets import GenericViewSet
-from rest_framework.permissions import IsAuthenticated
 
 from alerts.interfaces import IPriceAlertService
 from alerts.models import PriceAlert
@@ -9,21 +8,18 @@ from alerts.services import PriceAlertService
 
 
 class PriceAlertViewSet(
-    CreateModelMixin, ListModelMixin, DestroyModelMixin, GenericViewSet
+    CreateModelMixin,
+    GenericViewSet
 ):
-    action_permission_classes = {
-        "create": IsAuthenticated,
-        "list": IsAuthenticated,
-        "destroy": IsAuthenticated,
-    }
-
+    """
+    Endpoints for managing price alerts.
+    """
     request_action_serializer_classes = {
         "create": PriceAlertCreateSerializer,
     }
 
     response_action_serializer_classes = {
         "create": PriceAlertResponseSerializer,
-        "list": PriceAlertResponseSerializer,
     }
 
     def __init__(self, service: IPriceAlertService | None = None, **kwargs):
@@ -39,8 +35,6 @@ class PriceAlertViewSet(
         return self._service.create(
             user=self.request.user,
             product_id=serializer.validated_data["product_id"],
-            target_price_usd=serializer.validated_data["target_price_usd"],
+            target_price_cents=serializer.validated_data["target_price_cents"],
+            currency_code=serializer.validated_data["currency_code"],
         )
-
-    def perform_destroy(self, instance: PriceAlert, serializer=None) -> None:
-        self._service.delete(user=self.request.user, product_id=instance.product_id)

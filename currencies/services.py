@@ -31,6 +31,14 @@ class ExchangeRateSyncService(IExchangeRateSyncService):
         usd_to_uah = Decimal(str(usd_rate["rate"]))
         count = 0
 
+        # Add UAH rate, cause NBU doesn't provide it
+        uah_rate = {
+            "cc": "UAH",
+            "txt": "Українська гривня",
+            "rate": 1,
+        }
+        raw_rates.append(uah_rate)
+
         for item in raw_rates:
             currency, _ = Currency.objects.get_or_create(
                 code=item["cc"],

@@ -79,7 +79,6 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_FILTER_BACKENDS": [
         "django_filters.rest_framework.DjangoFilterBackend",
-        "rest_framework.filters.OrderingFilter",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_extra.openapi.RequestResponseAutoSchema",
     "EXCEPTION_HANDLER": "drf_extra.exception_handlers.errors_formatter_exception_handler",

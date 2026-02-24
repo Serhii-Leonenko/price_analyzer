@@ -39,12 +39,12 @@ class PriceHistoryStoreSerializer(serializers.Serializer):
     store = serializers.CharField()
     store_slug = serializers.CharField()
     price = serializers.DecimalField(max_digits=12, decimal_places=2)
-    recorded_at = serializers.DateTimeField()
+    created_at = serializers.DateTimeField()
 
 
 class PriceAverageHistorySerializer(serializers.Serializer):
     price = serializers.DecimalField(max_digits=12, decimal_places=2)
-    created_at = serializers.DateTimeField()
+    date = serializers.DateField()
 
 
 class PriceHistorySerializer(serializers.Serializer):

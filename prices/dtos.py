@@ -27,4 +27,4 @@ class StorePriceHistoryDTO:
     store_name: str
     store_slug: str
     price_cents: int
-    created_at: datetime.date
+    created_at: datetime.datetime

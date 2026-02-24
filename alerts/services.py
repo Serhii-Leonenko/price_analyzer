@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.utils import timezone
 
@@ -9,6 +10,9 @@ from currencies.interfaces import ICurrencyConversionService
 from currencies.services import CurrencyConversionService
 from prices.interfaces import IPriceQueryService
 from prices.services import PriceQueryService
+
+
+User = get_user_model()
 
 
 class EmailNotificationService(INotificationService):
@@ -43,20 +47,24 @@ class PriceAlertService(IPriceAlertService):
         self._notification = notification or EmailNotificationService()
         self._conversion = conversion or CurrencyConversionService()
 
-    def create(self, user, product_id: int, target_price_usd: Decimal) -> PriceAlert:
+    def create(
+        self,
+        user: User,
+        product_id: int,
+        target_price_cents: int,
+        currency_code: str
+    ) -> PriceAlert:
         alert, _ = PriceAlert.objects.update_or_create(
             user=user,
             product_id=product_id,
             defaults={
-                "target_price_usd": target_price_usd,
+                "target_price_cents": target_price_cents,
+                "currency_code": currency_code,
                 "is_active": True,
                 "triggered_at": None,
             },
         )
         return alert
-
-    def delete(self, user, product_id: int) -> None:
-        PriceAlert.objects.filter(user=user, product_id=product_id).delete()
 
     def check_and_send(self) -> int:
         active_alerts = PriceAlert.objects.filter(is_active=True).select_related(

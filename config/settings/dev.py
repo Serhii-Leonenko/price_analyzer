@@ -27,4 +27,6 @@ CELERY_TASK_ALWAYS_EAGER = True
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 DEFAULT_FROM_EMAIL = "noreply@priceanalyzer.com"
 
-REST_FRAMEWORK["DEFAULT_PERMISSION_CLASSES"] = []
+REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"] = [
+    "rest_framework.authentication.BasicAuthentication",
+]

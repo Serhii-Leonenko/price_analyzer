@@ -167,7 +167,7 @@ class PriceQueryService(IPriceQueryService):
 
         avg_price = PriceSnapshot.objects.filter(
             product_store__product_id=product_id,
-            recorded_at__gte=cutoff,
+            created_at__gte=cutoff,
         ).aggregate(avg_price=Avg("price_cents", output_field=models.IntegerField()))[
             "avg_price"
         ]

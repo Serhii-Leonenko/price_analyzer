@@ -1,7 +1,11 @@
 from abc import ABC, abstractmethod
 from decimal import Decimal
 
+from django.contrib.auth import get_user_model
+
 from alerts.models import PriceAlert
+
+User = get_user_model()
 
 
 class INotificationService(ABC):
@@ -18,11 +22,13 @@ class INotificationService(ABC):
 
 class IPriceAlertService(ABC):
     @abstractmethod
-    def create(self, user, product_id: int, target_price_usd: Decimal) -> PriceAlert:
-        pass
-
-    @abstractmethod
-    def delete(self, user, product_id: int) -> None:
+    def create(
+        self,
+        user: User,
+        product_id: int,
+        target_price_cents: int,
+        currency_code: str
+    ) -> PriceAlert:
         pass
 
     @abstractmethod

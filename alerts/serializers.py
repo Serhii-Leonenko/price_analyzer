@@ -5,8 +5,8 @@ from alerts.models import PriceAlert
 
 class PriceAlertCreateSerializer(serializers.Serializer):
     product_id = serializers.IntegerField()
-    target_price = serializers.DecimalField(max_digits=12, decimal_places=2)
-    currency = serializers.CharField()
+    target_price_cents = serializers.DecimalField(max_digits=12, decimal_places=2)
+    currency_code = serializers.CharField()
 
 
 class PriceAlertResponseSerializer(serializers.ModelSerializer):
@@ -18,7 +18,7 @@ class PriceAlertResponseSerializer(serializers.ModelSerializer):
             "id",
             "product_id",
             "product_name",
-            "target_price_usd",
+            "target_price_cents",
             "is_active",
             "created_at",
             "triggered_at",

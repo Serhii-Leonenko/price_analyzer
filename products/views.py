@@ -59,7 +59,7 @@ class ProductViewSet(GenericViewSet):
         return self._conversion.convert(amount, currency)
 
     def list(self, request: Request, *args, **kwargs) -> Response:
-        queryset = self.get_queryset()
+        queryset = self.filter_queryset(self.get_queryset())
 
         currency_filter = self._get_currency(request)
         ordering_filter = self._get_ordering(request)
@@ -160,7 +160,7 @@ class ProductViewSet(GenericViewSet):
 
         by_date = defaultdict(list)
         for price in history_prices:
-            day = price.created_at
+            day = price.created_at.date()
             converted = self._convert(price.price_cents, currency)
 
             if converted is not None:

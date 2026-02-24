@@ -6,6 +6,9 @@ from .serializers import CurrencySerializer, ExchangeRateSerializer
 
 
 class CurrencyViewSet(ListModelMixin, GenericViewSet):
+    """
+    Endpoints for managing currencies.
+    """
     queryset = Currency.objects.all().order_by("code")
 
     response_action_serializer_classes = {
@@ -14,6 +17,9 @@ class CurrencyViewSet(ListModelMixin, GenericViewSet):
 
 
 class ExchangeRateViewSet(ListModelMixin, GenericViewSet):
+    """
+    Endpoints for managing exchange rates.
+    """
     queryset = ExchangeRate.objects.select_related("currency").order_by(
         "-date", "currency__code"
     )
