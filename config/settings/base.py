@@ -89,6 +89,8 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "Price Analyzer API",
     "VERSION": "1.0.0",
     "DEFAULT_SCHEMA_CLASS": "drf_extra.openapi.RequestResponseAutoSchema",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SCHEMA_PATH_PREFIX": "/api/v[0-9]",
 }
 
 STORE_APIS = {
