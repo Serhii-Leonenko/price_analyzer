@@ -44,13 +44,11 @@ class ProductStore(BaseTimestampedModel):
 
     class Meta:
         db_table = "product_stores"
-
         constraints = [
             models.UniqueConstraint(
                 fields=["product", "store"], name="uniq_product_store"
             )
         ]
-
         indexes = [
             models.Index(fields=["store", "external_id"]),
         ]

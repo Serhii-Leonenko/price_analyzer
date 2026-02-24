@@ -24,10 +24,13 @@ class PriceAlertViewSet(
 
     def __init__(self, service: IPriceAlertService | None = None, **kwargs):
         super().__init__(**kwargs)
+
         self._service: IPriceAlertService = service or PriceAlertService()
 
     def get_queryset(self):
-        return PriceAlert.objects.filter(user=self.request.user).select_related(
+        return PriceAlert.objects.filter(
+            user=self.request.user
+        ).select_related(
             "product"
         )
 

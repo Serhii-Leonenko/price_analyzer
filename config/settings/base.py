@@ -100,17 +100,17 @@ STORE_APIS = {
 EXCHANGE_RATE_API_URL = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange"
 
 CELERY_BEAT_SCHEDULE = {
-    "import-all-products-daily": {
+    "import-all-products-every-hour": {
         "task": "products.tasks.import_all_products",
-        "schedule": 86400.0,
+        "schedule": 3600.0,
     },
     "sync-all-store-prices-every-hour": {
         "task": "prices.tasks.sync_all_store_prices",
         "schedule": 3600.0,
     },
-    "sync-exchange-rates-daily": {
+    "sync-exchange-rates-every-hour": {
         "task": "currencies.tasks.sync_today_exchange_rates",
-        "schedule": 86400.0,
+        "schedule": 3600.0,
     },
 }
 CELERY_TIMEZONE = TIME_ZONE

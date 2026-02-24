@@ -192,10 +192,12 @@ class PriceQueryService(IPriceQueryService):
         return TrendChoices.STABLE
 
     def get_history(self, product_id: int) -> list[StorePriceHistoryDTO]:
-        snapshots = (
-            PriceSnapshot.objects.filter(product_store__product_id=product_id)
-            .select_related("product_store__store")
-            .order_by("created_at")
+        snapshots = PriceSnapshot.objects.filter(
+            product_store__product_id=product_id
+        ).select_related(
+            "product_store__store"
+        ).order_by(
+            "created_at"
         )
 
         return [

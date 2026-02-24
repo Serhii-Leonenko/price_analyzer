@@ -1,8 +1,8 @@
 from drf_extra.mixins import ListModelMixin
 from drf_extra.viewsets import GenericViewSet
 
-from .models import Currency, ExchangeRate
-from .serializers import CurrencySerializer, ExchangeRateSerializer
+from currencies.models import Currency, ExchangeRate
+from currencies.serializers import CurrencySerializer, ExchangeRateSerializer
 
 
 class CurrencyViewSet(ListModelMixin, GenericViewSet):

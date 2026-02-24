@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import PriceSnapshot
+from prices.models import PriceSnapshot
 
 
 @admin.register(PriceSnapshot)
